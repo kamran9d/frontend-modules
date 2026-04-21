@@ -2,7 +2,7 @@
   "name": "auth-custom",
   "dependencies": [],
   "registryInjection": {
-    "import": "import { AuthProvider } from '@/components/auth/AuthProvider';",
+    "import": "import { AuthProvider } from '@/providers/AuthProvider';",
     "componentName": "AuthProvider"
   }
 }
