@@ -1,0 +1,8 @@
+{
+  "name": "auth-firebase",
+  "dependencies": ["firebase"],
+  "registryInjection": {
+    "import": "import { AuthProvider } from '@/providers/AuthProvider';",
+    "componentName": "AuthProvider"
+  }
+}
