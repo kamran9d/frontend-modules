@@ -60,6 +60,7 @@ Follow the directory conventions from the base repo:
 ```json
 {
   "name": "my-module",
+  "category": "auth",
   "dependencies": ["some-package", "another-package"],
   "registryInjection": {
     "import": "import { AuthProvider } from '@/providers/AuthProvider';",
@@ -71,9 +72,19 @@ Follow the directory conventions from the base repo:
 | Field | Description |
 |---|---|
 | `name` | Must match the directory name |
+| `category` | Logical group this module belongs to (e.g. `"auth"`). Only one module per category can be installed at a time. Omit only for modules that have no mutual exclusion concern |
 | `dependencies` | npm packages the `add-module` script will install. Use `[]` if none |
 | `registryInjection.import` | The exact import statement injected at the top of `registry.ts` |
 | `registryInjection.componentName` | The component name inserted into the `registeredProviders` array |
+
+#### Why `category` matters
+
+The `add-module` script tracks installed modules in `src/.modules.json`. When a developer runs `pnpm add-module auth-firebase` but already has `auth-custom` installed, the script detects the `"auth"` category conflict and asks a single yes/no question:
+
+- **y** — copy the new module's files into `src/` (nothing is deleted, registry is untouched, old provider stays active). The developer switches providers manually when ready.
+- **n** — do nothing, exit cleanly.
+
+There are no destructive operations. In CI (non-TTY), the prompt is skipped and the install aborts. Without `category`, no conflict check runs.
 
 ### Step 4 — Verify the injection target
 

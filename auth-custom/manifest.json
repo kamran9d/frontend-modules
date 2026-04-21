@@ -1,5 +1,6 @@
 {
   "name": "auth-custom",
+  "category": "auth",
   "dependencies": [],
   "registryInjection": {
     "import": "import { AuthProvider } from '@/providers/AuthProvider';",

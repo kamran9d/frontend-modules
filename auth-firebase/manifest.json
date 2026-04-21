@@ -1,5 +1,6 @@
 {
   "name": "auth-firebase",
+  "category": "auth",
   "dependencies": ["firebase"],
   "registryInjection": {
     "import": "import { AuthProvider } from '@/providers/AuthProvider';",
